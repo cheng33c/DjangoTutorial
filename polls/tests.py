@@ -52,7 +52,7 @@ class QuestionIndexViewTests(TestCase):
         response = self.client.get(reverse('polls:index'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "No polls are avaliable")
-        self.assertQuerysetEqual(response.context['lastest_question_list'], [])
+        self.assertQuerysetEqual(response.context['latest_question_list'], [])
 
     def test_past_questions(self):
         '''问题的pub_date是过去时间,返回问题的索引页'''
