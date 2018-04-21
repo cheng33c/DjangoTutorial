@@ -1,0 +1,19 @@
+<h1>{{ question.question_text }}</h1>
+
+{% if error_message %}
+<p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<!--
+构造form表单, action: 向指定地址发送数据
+forloop.counter： 显示for已经循环了多少次,这样很容易的和choice结合成不同的id值
+label for: 规定label绑定到哪个表单元素
+-->
+<form action="{% url 'polls:vote' question.id %}" method="post">
+    {% csrf_token %}
+    {% for choice in question.choice_set.all %}
+        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+    {% endfor %}
+    <input type="submit" value="Vote">
+</form>
